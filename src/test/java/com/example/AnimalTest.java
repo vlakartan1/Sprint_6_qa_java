@@ -27,15 +27,18 @@ public class AnimalTest {
 
     @Test
     public void getFood() throws Exception {
-        when(felineMock.eatMeat()).thenReturn(List.of("Корм"));
-        assertEquals(List.of("Корм"), cat.getFood());
+        List<String> food = List.of("Корм");
+        when(felineMock.eatMeat()).thenReturn(food);
+        List<String> result = cat.getFood();
+        assertEquals(food, result);
     }
 
 
     @Test
     public void testFelineEatMeat() throws Exception {
-        when(felineMock.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), felineMock.eatMeat());
+        List<String> meat = List.of("Животные", "Птицы", "Рыба");
+        when(felineMock.eatMeat()).thenReturn(meat);
+        assertEquals(meat, felineMock.eatMeat());
     }
 
     @Test
@@ -48,11 +51,5 @@ public class AnimalTest {
     public void testCatGetSound() {
         Cat cat = new Cat(new Feline());
         Assert.assertEquals("Мяу", cat.getSound());
-    }
-
-    @Test
-    public void testCatGetFood() throws Exception {
-        Cat cat = new Cat(new Feline());
-        Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), cat.getFood());
     }
 }

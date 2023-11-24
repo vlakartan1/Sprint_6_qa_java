@@ -20,7 +20,9 @@ public class CatTest {
     }
 
     @Test
-    public void getSound() {assertEquals("Мяу", cat.getSound());}
+    public void getSound() {
+        assertEquals("Мяу", cat.getSound());
+    }
 
     @Test
     public void getFood() throws Exception {

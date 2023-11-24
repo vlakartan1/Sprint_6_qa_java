@@ -4,10 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
-    @Spy
+    @Mock
     private Feline feline;
 
     @Test
@@ -45,6 +46,8 @@ public class LionTest {
     @Test
     public void testGetFood() throws Exception {
         Lion lion = Lion.getInstance("Самец", feline);
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
+        List<String> animals = List.of("Животные", "Птицы", "Рыба");
+        when(feline.getFood("Хищник")).thenReturn(animals);
+        assertEquals(animals, lion.getFood());
     }
 }

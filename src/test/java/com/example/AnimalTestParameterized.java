@@ -1,15 +1,12 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class AnimalTestParameterized {
@@ -23,20 +20,16 @@ public class AnimalTestParameterized {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                {"Травоядное", Arrays.asList("Трава", "Различные растения")},
-                {"Хищник", Arrays.asList("Животные", "Птицы", "Рыба")}
-        });
+        return List.of(
+                new Object[] {"Травоядное", List.of("Трава", "Различные растения")},
+                new Object[] {"Хищник", List.of("Животные", "Птицы", "Рыба")}
+        );
     }
 
     @Test
-    public void testGetFood() {
+    public void testGetFood() throws Exception {
         Animal animal = new Animal();
-        try {
-            List<String> actualFood = animal.getFood(animalKind);
-            assertTrue(actualFood.containsAll(expectedFood) && expectedFood.containsAll(actualFood));
-        } catch (Exception e) {
-            fail("Неожиданное исключение: " + e.getMessage());
-        }
+        List<String> actualFood = animal.getFood(animalKind);
+        assertEquals(new HashSet<>(expectedFood), new HashSet<>(actualFood));
     }
 }
